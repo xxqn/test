@@ -1,0 +1,53 @@
+{
+ "properties": {
+  "displayName": "TestStorage1",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "createdBy": "e6eb09a5-69ae-4405-9583-a10f27dd3105",
+   "createdOn": "2023-01-18T03:16:02.4492546Z",
+   "updatedBy": "e6eb09a5-69ae-4405-9583-a10f27dd3105",
+   "updatedOn": "2023-01-18T03:36:06.1773734Z"
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Storage/storageAccounts/blobServices"
+     },
+     {
+      "field": "Microsoft.Storage/storageAccounts/blobServices/default.deleteRetentionPolicy.enabled",
+      "notEquals": true
+     }
+    ]
+   },
+   "then": {
+    "effect": "modify",
+    "details": {
+     "roleDefinitionIds": [
+      "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c",
+      "/providers/microsoft.authorization/roleDefinitions/17d1049b-9a84-46fb-8f53-869881c3d3ab"
+     ],
+     "conflictEffect": "audit",
+     "operations": [
+      {
+       "operation": "addOrReplace",
+       "field": "Microsoft.Storage/storageAccounts/blobServices/default.deleteRetentionPolicy.enabled",
+       "value": true
+      },
+      {
+       "operation": "addOrReplace",
+       "field": "Microsoft.Storage/storageAccounts/blobServices/default.deleteRetentionPolicy.days",
+       "value": 10
+      }
+     ]
+    }
+   }
+  }
+ },
+ "id": "/subscriptions/4f27bec7-26bd-40f7-af24-5962a53d921e/providers/Microsoft.Authorization/policyDefinitions/3fe71332-7bdc-450a-aa69-e3d035f5cbca",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "3fe71332-7bdc-450a-aa69-e3d035f5cbca"
+}
